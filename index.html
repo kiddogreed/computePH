@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- Primary SEO -->
+  <title>ComputePH 🧮₱ — Free Salary, Loan, Freelance &amp; Savings Calculators + QR Generator</title>
+  <meta name="description" content="ComputePH is a free online toolkit with a salary calculator, loan calculator, freelance rate calculator, savings goal planner, and QR code generator. Calculate better, plan smarter — no signup required." />
+  <meta name="keywords" content="salary calculator, loan calculator philippines, freelance rate calculator, savings goal calculator, QR code generator free, monthly to annual salary converter, overtime pay calculator, computePH" />
+  <meta name="author" content="ComputePH" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://computeph.github.io/" />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#4f46e5" media="(prefers-color-scheme: light)" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ComputePH" />
+  <meta property="og:title" content="ComputePH 🧮₱ — Calculate Better. Plan Smarter." />
+  <meta property="og:description" content="Free salary, loan, freelance rate, and savings calculators plus a QR code generator. Fast, private, and works offline as a PWA." />
+  <meta property="og:image" content="https://computeph.github.io/assets/og-image.svg" />
+  <meta property="og:url" content="https://computeph.github.io/" />
+  <meta property="og:locale" content="en_PH" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ComputePH 🧮₱ — Calculate Better. Plan Smarter." />
+  <meta name="twitter:description" content="Free salary, loan, freelance rate, and savings calculators plus a QR code generator." />
+  <meta name="twitter:image" content="https://computeph.github.io/assets/og-image.svg" />
+
+  <!-- Icons / PWA -->
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg" />
+  <!-- manifest link is injected by js/pwa.js, only over http(s) — file:// blocks manifest fetches entirely -->
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ComputePH",
+    "url": "https://computeph.github.io/",
+    "description": "Free online salary calculator, loan calculator, freelance rate calculator, savings goal calculator, and QR code generator.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PHP" }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is ComputePH really free to use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. All calculators and the QR code generator are 100% free, with no signup required. Optional premium tools may be added in the future." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does ComputePH store my financial data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No data is sent to any server. Calculations run entirely in your browser, and history is saved only in your device's local storage." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use ComputePH offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. ComputePH is an installable Progressive Web App (PWA) that works offline after your first visit." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS (CDN, JIT) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81'
+            },
+            peso: { 500: '#16a34a', 600: '#15803d' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#hero" class="flex items-center gap-2 font-extrabold text-xl text-brand-700 dark:text-brand-300" aria-label="ComputePH home">
+          <span aria-hidden="true">🧮₱</span>
+          <span>ComputePH</span>
+        </a>
+
+        <nav id="tool-nav" aria-label="Calculator navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <a href="#salary-calculator" class="nav-link">Salary</a>
+          <a href="#loan-calculator" class="nav-link">Loan</a>
+          <a href="#freelance-calculator" class="nav-link">Freelance</a>
+          <a href="#savings-calculator" class="nav-link">Savings</a>
+          <a href="#qr-generator" class="nav-link">QR Code</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <label for="currency-select" class="sr-only">Currency</label>
+          <select id="currency-select" class="select-field !py-1.5 !text-sm w-[84px]" aria-label="Select display currency">
+            <option value="PHP">₱ PHP</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+          </select>
+
+          <button id="theme-toggle" type="button" class="icon-btn" aria-label="Toggle dark mode" aria-pressed="false">
+            <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg id="icon-moon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z"/></svg>
+          </button>
+
+          <button id="install-btn" type="button" class="hidden sm:inline-flex btn-outline !py-1.5 !px-3 !text-sm" hidden>
+            Install App
+          </button>
+
+          <button id="mobile-nav-toggle" type="button" class="icon-btn md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile calculator navigation" class="md:hidden hidden pb-3 flex flex-col gap-1 text-sm font-medium">
+        <a href="#salary-calculator" class="nav-link">Salary Calculator</a>
+        <a href="#loan-calculator" class="nav-link">Loan Calculator</a>
+        <a href="#freelance-calculator" class="nav-link">Freelance Rate</a>
+        <a href="#savings-calculator" class="nav-link">Savings Goal</a>
+        <a href="#qr-generator" class="nav-link">QR Generator</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-700 to-indigo-900 opacity-95" aria-hidden="true"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center text-white">
+      <p class="inline-block bg-white/15 rounded-full px-4 py-1 text-sm font-semibold tracking-wide mb-5">🧮 ₱ Free forever · No signup</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">Calculate Better. Plan Smarter.</h1>
+      <p class="mt-4 text-lg sm:text-xl text-brand-100 max-w-2xl mx-auto">Free financial calculators, QR tools, and everyday utilities for everyone — built for the Philippines and beyond.</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="#salary-calculator" class="btn-primary bg-white text-brand-700 hover:bg-brand-50">Try Salary Calculator</a>
+        <a href="#qr-generator" class="btn-outline border-white/60 text-white hover:bg-white/10">Generate a QR Code</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reserved AdSense slot (top) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <aside class="ad-slot" id="ad-slot-top" aria-label="Advertisement">
+      <span>Ad space — 728×90 leaderboard (AdSense)</span>
+    </aside>
+  </div>
+
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <!-- ===================== SALARY CALCULATOR ===================== -->
+    <section id="salary-calculator" class="tool-card" aria-labelledby="salary-heading">
+      <div class="tool-card-header">
+        <div>
+          <h2 id="salary-heading" class="tool-title">💰 Salary Calculator</h2>
+          <p class="tool-subtitle">Convert between monthly, annual, hourly, and daily pay — plus overtime.</p>
+        </div>
+      </div>
+
+      <form id="salary-form" class="grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+        <div class="field">
+          <label for="salary-amount">Salary amount</label>
+          <input type="number" id="salary-amount" name="amount" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 30000" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="salary-period">This amount is per</label>
+          <select id="salary-period" name="period" class="select-field">
+            <option value="monthly" selected>Month</option>
+            <option value="annual">Year</option>
+            <option value="hourly">Hour</option>
+            <option value="daily">Day</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="salary-hours-per-day">Hours per day</label>
+          <input type="number" id="salary-hours-per-day" min="1" max="24" step="0.5" value="8" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="salary-days-per-week">Working days per week</label>
+          <input type="number" id="salary-days-per-week" min="1" max="7" step="1" value="5" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="salary-ot-hours">Overtime hours (per month)</label>
+          <input type="number" id="salary-ot-hours" min="0" step="0.5" value="0" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="salary-ot-multiplier">Overtime rate multiplier</label>
+          <input type="number" id="salary-ot-multiplier" min="1" step="0.05" value="1.25" class="input-field" />
+        </div>
+
+        <div class="md:col-span-2 flex flex-wrap gap-3 pt-2">
+          <button type="submit" class="btn-primary">Calculate Salary</button>
+          <button type="reset" class="btn-outline">Reset</button>
+        </div>
+      </form>
+
+      <div id="salary-results" class="results-panel hidden" aria-live="polite">
+        <div class="result-grid">
+          <div class="result-item"><span>Monthly Salary</span><strong id="salary-out-monthly">—</strong></div>
+          <div class="result-item"><span>Annual Salary</span><strong id="salary-out-annual">—</strong></div>
+          <div class="result-item"><span>Hourly Rate</span><strong id="salary-out-hourly">—</strong></div>
+          <div class="result-item"><span>Daily Rate</span><strong id="salary-out-daily">—</strong></div>
+          <div class="result-item"><span>Overtime Pay</span><strong id="salary-out-ot">—</strong></div>
+          <div class="result-item highlight"><span>Total Monthly + OT</span><strong id="salary-out-total">—</strong></div>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn-ghost copy-btn" data-target="salary">📋 Copy result</button>
+          <button type="button" class="btn-ghost share-btn" data-target="salary">🔗 Share link</button>
+        </div>
+      </div>
+
+      <details class="history-block">
+        <summary>Recent salary calculations</summary>
+        <ul id="salary-history" class="history-list"><li class="empty">No history yet.</li></ul>
+        <button type="button" id="salary-clear-history" class="btn-ghost !text-xs !py-1 !px-2 mt-2">Clear history</button>
+      </details>
+
+      <aside class="affiliate-box" aria-label="Recommended tools for payroll and salary">
+        <h3>💡 Recommended for freelancers &amp; employees</h3>
+        <p>Track your income automatically and get paid faster with tools trusted by remote professionals.</p>
+        <ul>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Wise — Multi-currency account for global pay <span aria-hidden="true">↗</span></a></li>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Payoneer — Get paid from international clients <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- ===================== LOAN CALCULATOR ===================== -->
+    <section id="loan-calculator" class="tool-card" aria-labelledby="loan-heading">
+      <div class="tool-card-header">
+        <div>
+          <h2 id="loan-heading" class="tool-title">🏦 Loan Calculator</h2>
+          <p class="tool-subtitle">Estimate monthly payments, total interest, and see a year-by-year breakdown.</p>
+        </div>
+      </div>
+
+      <form id="loan-form" class="grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+        <div class="field">
+          <label for="loan-amount">Loan amount</label>
+          <input type="number" id="loan-amount" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 500000" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="loan-rate">Annual interest rate (%)</label>
+          <input type="number" id="loan-rate" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 6.5" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="loan-term">Loan term</label>
+          <input type="number" id="loan-term" min="1" step="1" placeholder="e.g. 5" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="loan-term-unit">Term unit</label>
+          <select id="loan-term-unit" class="select-field">
+            <option value="years" selected>Years</option>
+            <option value="months">Months</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2 flex flex-wrap gap-3 pt-2">
+          <button type="submit" class="btn-primary">Calculate Loan</button>
+          <button type="reset" class="btn-outline">Reset</button>
+        </div>
+      </form>
+
+      <div id="loan-results" class="results-panel hidden" aria-live="polite">
+        <div class="result-grid">
+          <div class="result-item highlight"><span>Monthly Payment</span><strong id="loan-out-monthly">—</strong></div>
+          <div class="result-item"><span>Total Repayment</span><strong id="loan-out-total">—</strong></div>
+          <div class="result-item"><span>Total Interest</span><strong id="loan-out-interest">—</strong></div>
+          <div class="result-item"><span>Number of Payments</span><strong id="loan-out-count">—</strong></div>
+        </div>
+
+        <div class="mt-5 overflow-x-auto">
+          <table class="data-table" id="loan-breakdown-table">
+            <caption class="sr-only">Year-by-year loan repayment breakdown</caption>
+            <thead>
+              <tr><th scope="col">Year</th><th scope="col">Principal Paid</th><th scope="col">Interest Paid</th><th scope="col">Remaining Balance</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" class="btn-ghost copy-btn" data-target="loan">📋 Copy result</button>
+          <button type="button" class="btn-ghost share-btn" data-target="loan">🔗 Share link</button>
+        </div>
+      </div>
+
+      <details class="history-block">
+        <summary>Recent loan calculations</summary>
+        <ul id="loan-history" class="history-list"><li class="empty">No history yet.</li></ul>
+        <button type="button" id="loan-clear-history" class="btn-ghost !text-xs !py-1 !px-2 mt-2">Clear history</button>
+      </details>
+
+      <aside class="affiliate-box" aria-label="Recommended loan and finance partners">
+        <h3>💡 Compare rates before you borrow</h3>
+        <p>Shopping around can save you thousands in interest over the life of a loan.</p>
+        <ul>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Compare personal loan offers <span aria-hidden="true">↗</span></a></li>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Check your credit score for free <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- ===================== FREELANCE RATE CALCULATOR ===================== -->
+    <section id="freelance-calculator" class="tool-card" aria-labelledby="freelance-heading">
+      <div class="tool-card-header">
+        <div>
+          <h2 id="freelance-heading" class="tool-title">🧑‍💻 Freelance Rate Calculator</h2>
+          <p class="tool-subtitle">Find the hourly and daily rate you need to hit your income goals.</p>
+        </div>
+      </div>
+
+      <form id="freelance-form" class="grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+        <div class="field">
+          <label for="freelance-income">Desired monthly income</label>
+          <input type="number" id="freelance-income" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 60000" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="freelance-expenses">Monthly business expenses</label>
+          <input type="number" id="freelance-expenses" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 8000" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="freelance-tax">Tax rate (%)</label>
+          <input type="number" id="freelance-tax" min="0" max="90" step="0.1" placeholder="e.g. 8" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="freelance-hours">Billable hours per month</label>
+          <input type="number" id="freelance-hours" min="1" step="1" value="120" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="freelance-hours-per-day">Billable hours per day</label>
+          <input type="number" id="freelance-hours-per-day" min="1" max="24" step="0.5" value="6" class="input-field" />
+        </div>
+
+        <div class="md:col-span-2 flex flex-wrap gap-3 pt-2">
+          <button type="submit" class="btn-primary">Calculate Rate</button>
+          <button type="reset" class="btn-outline">Reset</button>
+        </div>
+      </form>
+
+      <div id="freelance-results" class="results-panel hidden" aria-live="polite">
+        <div class="result-grid">
+          <div class="result-item"><span>Required Gross Income</span><strong id="freelance-out-gross">—</strong></div>
+          <div class="result-item highlight"><span>Recommended Hourly Rate</span><strong id="freelance-out-hourly">—</strong></div>
+          <div class="result-item highlight"><span>Recommended Daily Rate</span><strong id="freelance-out-daily">—</strong></div>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn-ghost copy-btn" data-target="freelance">📋 Copy result</button>
+          <button type="button" class="btn-ghost share-btn" data-target="freelance">🔗 Share link</button>
+        </div>
+      </div>
+
+      <details class="history-block">
+        <summary>Recent freelance rate calculations</summary>
+        <ul id="freelance-history" class="history-list"><li class="empty">No history yet.</li></ul>
+        <button type="button" id="freelance-clear-history" class="btn-ghost !text-xs !py-1 !px-2 mt-2">Clear history</button>
+      </details>
+
+      <aside class="affiliate-box" aria-label="Recommended tools for freelancers">
+        <h3>💡 Run your freelance business smoothly</h3>
+        <p>Invoicing, contracts, and time tracking tools built for independent professionals.</p>
+        <ul>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Create free professional invoices <span aria-hidden="true">↗</span></a></li>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Find freelance gigs on Upwork <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- ===================== SAVINGS GOAL CALCULATOR ===================== -->
+    <section id="savings-calculator" class="tool-card" aria-labelledby="savings-heading">
+      <div class="tool-card-header">
+        <div>
+          <h2 id="savings-heading" class="tool-title">🐖 Savings Goal Calculator</h2>
+          <p class="tool-subtitle">See how long it takes to reach your target with monthly contributions.</p>
+        </div>
+      </div>
+
+      <form id="savings-form" class="grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+        <div class="field">
+          <label for="savings-target">Savings target</label>
+          <input type="number" id="savings-target" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 200000" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="savings-current">Current savings</label>
+          <input type="number" id="savings-current" min="0" step="0.01" inputmode="decimal" value="0" class="input-field" />
+        </div>
+        <div class="field">
+          <label for="savings-monthly">Monthly contribution</label>
+          <input type="number" id="savings-monthly" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 5000" required class="input-field" />
+        </div>
+        <div class="field">
+          <label for="savings-rate">Annual interest rate (%)</label>
+          <input type="number" id="savings-rate" min="0" step="0.01" inputmode="decimal" value="0" class="input-field" />
+        </div>
+
+        <div class="md:col-span-2 flex flex-wrap gap-3 pt-2">
+          <button type="submit" class="btn-primary">Calculate Goal</button>
+          <button type="reset" class="btn-outline">Reset</button>
+        </div>
+      </form>
+
+      <div id="savings-results" class="results-panel hidden" aria-live="polite">
+        <div class="result-grid">
+          <div class="result-item highlight"><span>Time to Reach Goal</span><strong id="savings-out-time">—</strong></div>
+          <div class="result-item highlight"><span>Estimated Date</span><strong id="savings-out-date">—</strong></div>
+          <div class="result-item"><span>Total Contributed</span><strong id="savings-out-contributed">—</strong></div>
+          <div class="result-item"><span>Interest Earned</span><strong id="savings-out-interest">—</strong></div>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn-ghost copy-btn" data-target="savings">📋 Copy result</button>
+          <button type="button" class="btn-ghost share-btn" data-target="savings">🔗 Share link</button>
+        </div>
+      </div>
+
+      <details class="history-block">
+        <summary>Recent savings calculations</summary>
+        <ul id="savings-history" class="history-list"><li class="empty">No history yet.</li></ul>
+        <button type="button" id="savings-clear-history" class="btn-ghost !text-xs !py-1 !px-2 mt-2">Clear history</button>
+      </details>
+
+      <aside class="affiliate-box" aria-label="Recommended savings and investment partners">
+        <h3>💡 Make your money grow faster</h3>
+        <p>Explore digital banks and investment apps with competitive interest rates.</p>
+        <ul>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Open a high-yield digital savings account <span aria-hidden="true">↗</span></a></li>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Start investing with as little as ₱50 <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- Reserved AdSense slot (mid content) -->
+    <aside class="ad-slot" id="ad-slot-mid" aria-label="Advertisement">
+      <span>Ad space — 336×280 responsive rectangle (AdSense)</span>
+    </aside>
+
+    <!-- ===================== QR CODE GENERATOR ===================== -->
+    <section id="qr-generator" class="tool-card" aria-labelledby="qr-heading">
+      <div class="tool-card-header">
+        <div>
+          <h2 id="qr-heading" class="tool-title">🔳 QR Code Generator</h2>
+          <p class="tool-subtitle">Turn any text or URL into a downloadable QR code — 100% free.</p>
+        </div>
+      </div>
+
+      <form id="qr-form" class="grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+        <div class="field md:col-span-2">
+          <label for="qr-text">Text or URL</label>
+          <textarea id="qr-text" rows="3" placeholder="https://example.com or any text" required class="input-field resize-y"></textarea>
+        </div>
+        <div class="field">
+          <label for="qr-size">Size</label>
+          <select id="qr-size" class="select-field">
+            <option value="200">Small (200px)</option>
+            <option value="300" selected>Medium (300px)</option>
+            <option value="500">Large (500px)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="qr-ecc">Error correction</label>
+          <select id="qr-ecc" class="select-field">
+            <option value="L">Low</option>
+            <option value="M" selected>Medium</option>
+            <option value="Q">Quartile</option>
+            <option value="H">High</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="qr-fg">Foreground color</label>
+          <input type="color" id="qr-fg" value="#0f172a" class="input-field !p-1 h-11" />
+        </div>
+        <div class="field">
+          <label for="qr-bg">Background color</label>
+          <input type="color" id="qr-bg" value="#ffffff" class="input-field !p-1 h-11" />
+        </div>
+
+        <div class="md:col-span-2 flex flex-wrap gap-3 pt-2">
+          <button type="submit" class="btn-primary">Generate QR Code</button>
+          <button type="reset" class="btn-outline">Reset</button>
+        </div>
+      </form>
+
+      <div id="qr-results" class="results-panel hidden">
+        <div class="flex flex-col items-center gap-4">
+          <div id="qr-canvas-container" class="rounded-lg shadow-md border border-slate-200 dark:border-slate-700 bg-white p-3 inline-flex"></div>
+          <div class="result-actions">
+            <button type="button" id="qr-download" class="btn-primary">⬇️ Download PNG</button>
+            <button type="button" class="btn-ghost copy-btn" data-target="qr">📋 Copy text</button>
+            <button type="button" class="btn-ghost share-btn" data-target="qr">🔗 Share link</button>
+          </div>
+        </div>
+      </div>
+
+      <details class="history-block">
+        <summary>Recent QR codes</summary>
+        <ul id="qr-history" class="history-list"><li class="empty">No history yet.</li></ul>
+        <button type="button" id="qr-clear-history" class="btn-ghost !text-xs !py-1 !px-2 mt-2">Clear history</button>
+      </details>
+
+      <aside class="affiliate-box" aria-label="Recommended tools for business QR codes">
+        <h3>💡 Using QR codes for your business?</h3>
+        <p>Print professional QR standees, table tents, and stickers for your shop or menu.</p>
+        <ul>
+          <li><a href="#" rel="sponsored nofollow noopener" target="_blank">Design custom stickers &amp; signage <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- ===================== NEWSLETTER ===================== -->
+    <section id="newsletter" class="tool-card !bg-gradient-to-br !from-brand-600 !to-indigo-800 !text-white" aria-labelledby="newsletter-heading">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 id="newsletter-heading" class="text-2xl font-bold">📬 Get money tips in your inbox</h2>
+        <p class="mt-2 text-brand-100">Join our free newsletter for salary trends, saving hacks, and freelancer tips. No spam, unsubscribe anytime.</p>
+        <form id="newsletter-form" class="mt-6 flex flex-col sm:flex-row gap-3 justify-center" novalidate>
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" required placeholder="you@example.com" class="input-field !text-slate-800 flex-1 max-w-sm" />
+          <button type="submit" class="btn-primary bg-white !text-brand-700 hover:bg-brand-50">Subscribe</button>
+        </form>
+        <output id="newsletter-note" class="block mt-3 text-sm text-brand-100"></output>
+      </div>
+    </section>
+
+    <!-- ===================== PREMIUM CTA ===================== -->
+    <section id="premium" class="tool-card text-center" aria-labelledby="premium-heading">
+      <h2 id="premium-heading" class="text-2xl font-bold">🚀 ComputePH Pro (Coming Soon)</h2>
+      <p class="tool-subtitle max-w-xl mx-auto">Unlock unlimited saved calculations, PDF export, custom QR branding, and an ad-free experience.</p>
+      <button type="button" class="btn-primary mt-4" id="premium-cta-btn">Notify Me When Available</button>
+    </section>
+
+    <!-- ===================== SUPPORT / DONATE ===================== -->
+    <section id="support" class="tool-card text-center" aria-labelledby="support-heading">
+      <h2 id="support-heading" class="text-2xl font-bold">☕ Support ComputePH</h2>
+      <p class="tool-subtitle max-w-xl mx-auto">This project is free to use and maintained in my spare time. If it helped you, consider buying me a coffee or sending a tip. Your support helps fund new tools and keep the site online.</p>
+      <div class="mt-6 inline-flex flex-col items-center gap-1.5 bg-slate-50 dark:bg-slate-800 rounded-xl px-8 py-6 border border-slate-200 dark:border-slate-700">
+        <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">🇵🇭 GCash</span>
+        <span id="support-gcash-number" class="text-2xl font-extrabold tracking-wide">0920-637-0205</span>
+        <span class="text-sm text-slate-500 dark:text-slate-400">J**n R**s*l*e D***n**</span>
+        <button type="button" id="support-copy-btn" class="btn-ghost mt-3 !text-sm">📋 Copy GCash number</button>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="tool-card" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" class="tool-title">❓ Frequently Asked Questions</h2>
+      <div class="mt-4 space-y-3">
+        <details class="faq-item">
+          <summary>Is ComputePH really free to use?</summary>
+          <p>Yes. All calculators and the QR code generator are 100% free, with no signup required. Optional premium tools may be added in the future.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does ComputePH store my financial data?</summary>
+          <p>No data is sent to any server. Calculations run entirely in your browser, and history is saved only in your device's local storage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use ComputePH offline?</summary>
+          <p>Yes. ComputePH is an installable Progressive Web App (PWA) that works offline after your first visit.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
+      <div>
+        <p class="font-extrabold text-lg text-brand-700 dark:text-brand-300">🧮₱ ComputePH</p>
+        <p class="mt-2 text-slate-500 dark:text-slate-400">Calculate Better. Plan Smarter. Free financial calculators, QR tools, and everyday utilities for everyone.</p>
+      </div>
+      <div>
+        <p class="font-semibold mb-2">Tools</p>
+        <ul class="space-y-1 text-slate-500 dark:text-slate-400">
+          <li><a href="#salary-calculator" class="hover:text-brand-600">Salary Calculator</a></li>
+          <li><a href="#loan-calculator" class="hover:text-brand-600">Loan Calculator</a></li>
+          <li><a href="#freelance-calculator" class="hover:text-brand-600">Freelance Rate Calculator</a></li>
+          <li><a href="#savings-calculator" class="hover:text-brand-600">Savings Goal Calculator</a></li>
+          <li><a href="#qr-generator" class="hover:text-brand-600">QR Code Generator</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold mb-2">Legal &amp; Disclosure</p>
+        <ul class="space-y-1 text-slate-500 dark:text-slate-400">
+          <li>Results are estimates for informational purposes only, not financial advice.</li>
+          <li>Some links are affiliate links — we may earn a commission at no extra cost to you.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-200 dark:border-slate-800 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
+      © <span id="footer-year"></span> ComputePH. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <output id="toast" class="toast"></output>
+
+  <!-- Install banner -->
+  <div id="install-banner" class="install-banner hidden">
+    <p>Install ComputePH for quick, offline access.</p>
+    <div class="flex gap-2">
+      <button id="install-banner-yes" class="btn-primary !py-1.5 !px-3 !text-sm">Install</button>
+      <button id="install-banner-no" class="btn-ghost !py-1.5 !px-3 !text-sm">Not now</button>
+    </div>
+  </div>
+
+  <!-- QR encoding library (self-hosted, no CDN/backend dependency — see js/vendor/qrcode.js) -->
+  <script src="js/vendor/qrcode.js" defer></script>
+
+  <!-- App scripts — plain (non-module) scripts loaded in dependency order so the app also
+       works when index.html is opened directly via file:// (browsers block ES module imports there). -->
+  <script src="js/utils.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <script src="js/currency.js" defer></script>
+  <script src="js/share.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+  <script src="js/qrcode.js" defer></script>
+  <script src="js/calculators/salary.js" defer></script>
+  <script src="js/calculators/loan.js" defer></script>
+  <script src="js/calculators/freelance.js" defer></script>
+  <script src="js/calculators/savings.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

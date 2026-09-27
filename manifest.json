@@ -1,0 +1,28 @@
+{
+  "name": "ComputePH — Calculate Better. Plan Smarter.",
+  "short_name": "ComputePH",
+  "description": "Free salary, loan, freelance rate, and savings calculators plus a QR code generator.",
+  "id": "/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "lang": "en-PH",
+  "categories": ["finance", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

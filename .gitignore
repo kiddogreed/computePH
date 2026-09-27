@@ -1,0 +1,40 @@
+# --- Local/dev notes (not part of the deployed site) ---
+prompt.txt
+notes.md
+TODO.md
+robots.txt
+*.local.md
+
+# --- Secrets / environment ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# --- Editor / IDE ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.user
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Node / tooling (in case build tools are added later) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.cache/
+
+# --- Logs / temp ---
+*.log
+*.tmp
+*.bak
